@@ -289,6 +289,9 @@ function createWindow() {
 	ipcMain.on("strokeWidthChanged", (e, strokeWidth) =>
 		controller.webContents.send("strokeWidthChanged", strokeWidth)
 	);
+	ipcMain.on("opacityChanged", (e, opacity) =>
+		board.webContents.send("opacityChanged", opacity)
+	);
 
 	ipcMain.on("arrowSingle", () => board.webContents.send("arrowSingle"));
 	ipcMain.on("arrowDouble", () => board.webContents.send("arrowDouble"));

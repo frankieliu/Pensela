@@ -392,3 +392,31 @@ body {
 	border-radius: 50%;
 	transition: width 0.15s ease-out, height 0.15s ease-out;
 }
+
+.opacity-control {
+	width: 50vh;
+	height: 50vh;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.opacity-slider {
+	-webkit-appearance: none;
+	width: 40vh;
+	height: 8px;
+	border-radius: 4px;
+	background: linear-gradient(to right, transparent, var(--colSelect, #b4deff));
+	outline: none;
+}
+
+.opacity-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #fff;
+	cursor: pointer;
+	box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}

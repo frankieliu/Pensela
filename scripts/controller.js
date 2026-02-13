@@ -171,3 +171,8 @@ $(".tool-item.arrow.single").on("click", () => ipcRenderer.send("arrowSingle"));
 $(".tool-item.arrow.double").on("click", () => ipcRenderer.send("arrowDouble"));
 
 $(".tool-item.highlighter").on("click", () => ipcRenderer.send("highlighter"));
+
+$(".opacity-slider").on("input", (e) => {
+	const opacity = e.target.value / 100;
+	ipcRenderer.send("opacityChanged", opacity);
+});

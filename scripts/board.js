@@ -23,6 +23,13 @@ let masterBoard = new Konva.Rect({
 layer.add(masterBoard);
 stage.add(layer);
 
+// Helper function to apply opacity to hex colors
+function applyOpacity(hexColor) {
+	const alpha = Math.round(boardState.opacity * 255).toString(16).padStart(2, '0');
+	const baseColor = hexColor.length === 9 ? hexColor.slice(0, 7) : hexColor;
+	return baseColor + alpha;
+}
+
 let x = 0,
 	y = 0,
 	c = null,
@@ -109,8 +116,8 @@ ipcRenderer.on("drawSquare", () => {
 			y: y,
 			width: 0,
 			height: 0,
-			fill: boardState.col,
-			stroke: boardState.strokeCol,
+			fill: applyOpacity(boardState.col),
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth,
 		});
 		c.on("click tap", (e) => {
@@ -151,8 +158,8 @@ ipcRenderer.on("drawCircle", () => {
 			y: y,
 			radiusX: 0,
 			radiusY: 0,
-			fill: boardState.col,
-			stroke: boardState.strokeCol,
+			fill: applyOpacity(boardState.col),
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth,
 		});
 		c.on("click tap", (e) => {
@@ -190,7 +197,7 @@ ipcRenderer.on("drawLine", () => {
 	stage.on("mousedown touchstart", () => {
 		c = new Konva.Line({
 			points: [x, y, x, y],
-			stroke: boardState.strokeCol,
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth,
 			hitStrokeWidth: Math.max(10, boardState.strokeWidth),
 		});
@@ -232,9 +239,9 @@ ipcRenderer.on("drawTriangle", () => {
 			ox: x,
 			oy: y,
 			points: [x, y, x, y, x, y],
-			fill: boardState.col,
+			fill: applyOpacity(boardState.col),
 			closed: true,
-			stroke: boardState.strokeCol,
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth,
 		});
 		c.on("click tap", (e) => {
@@ -286,11 +293,11 @@ ipcRenderer.on("drawPolygon", () => {
 		} else {
 			c = new Konva.Line({
 				points: [x, y, x, y],
-				fill: boardState.col,
+				fill: applyOpacity(boardState.col),
 				stroke: boardState.col,
 				strokeWidth: boardState.strokeWidth,
 				closed: true,
-				stroke: boardState.strokeCol,
+				stroke: applyOpacity(boardState.strokeCol),
 			});
 			c.on("finish", () => {
 				anim.stop();
@@ -357,9 +364,9 @@ ipcRenderer.on("drawCross", () => {
 				x - r,
 				y + r * 2,
 			],
-			fill: boardState.col,
+			fill: applyOpacity(boardState.col),
 			closed: true,
-			stroke: boardState.strokeCol,
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth / 2,
 		});
 		c.on("click tap", (e) => {
@@ -415,9 +422,9 @@ ipcRenderer.on("drawStar", () => {
 				x + r2 * cos((-234 * pi) / 180),
 				y - r2 * sin((-234 * pi) / 180),
 			],
-			fill: boardState.col,
+			fill: applyOpacity(boardState.col),
 			closed: true,
-			stroke: boardState.strokeCol,
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth / 2,
 		});
 		c.on("click tap", (e) => {
@@ -463,9 +470,9 @@ ipcRenderer.on("drawTick", () => {
 				x - l * 2,
 				y - l,
 			],
-			fill: boardState.col,
+			fill: applyOpacity(boardState.col),
 			closed: true,
-			stroke: boardState.strokeCol,
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth / 2,
 		});
 		c.on("click tap", (e) => {
@@ -563,9 +570,9 @@ ipcRenderer.on("arrowSingle", () => {
 		H = { x: x, y: y };
 		c = new Konva.Line({
 			points: [],
-			fill: boardState.strokeCol,
+			fill: applyOpacity(boardState.strokeCol),
 			closed: true,
-			stroke: boardState.strokeCol,
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: 0,
 		});
 		c.on("click tap", (e) => {
@@ -695,9 +702,9 @@ ipcRenderer.on("arrowDouble", () => {
 		F = { x: x, y: y };
 		c = new Konva.Line({
 			points: [],
-			fill: boardState.strokeCol,
+			fill: applyOpacity(boardState.strokeCol),
 			closed: true,
-			stroke: boardState.strokeCol,
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: 0,
 		});
 		c.on("click tap", (e) => {
@@ -734,7 +741,7 @@ ipcRenderer.on("drawFreehand", () => {
 	stage.on("mousedown touchstart", () => {
 		c = new Konva.Line({
 			points: [x, y],
-			stroke: boardState.strokeCol,
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth,
 			lineJoin: "round",
 			lineCap: "round",
@@ -773,7 +780,7 @@ ipcRenderer.on("highlighter", () => {
 	stage.on("mousedown touchstart", () => {
 		c = new Konva.Line({
 			points: [x, y],
-			stroke: boardState.strokeCol + "66",
+			stroke: applyOpacity(boardState.strokeCol),
 			strokeWidth: boardState.strokeWidth * 2,
 			lineJoin: "round",
 			lineCap: "square",
@@ -813,7 +820,7 @@ ipcRenderer.on("textMode", () => {
 			text: "",
 			fontSize: 30,
 			fontFamily: "Calibri",
-			fill: boardState.strokeCol,
+			fill: applyOpacity(boardState.strokeCol),
 		});
 		c.on("click tap", (e) => {
 			if (boardState.mode == "eraser") {

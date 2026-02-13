@@ -8,6 +8,7 @@ let boardState = {
 	before: [],
 	after: [],
 	strokeWidth: 10,
+	opacity: 1.0,
 };
 
 ipcRenderer.on("setMode", (e, arg) => {
@@ -30,4 +31,8 @@ ipcRenderer.on("strokeIncrease", () => {
 ipcRenderer.on("strokeDecrease", () => {
 	if (boardState.strokeWidth > 5) boardState.strokeWidth -= 5;
 	ipcRenderer.send("strokeWidthChanged", boardState.strokeWidth);
+});
+
+ipcRenderer.on("opacityChanged", (e, opacity) => {
+	boardState.opacity = opacity;
 });
