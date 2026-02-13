@@ -7,6 +7,8 @@ let toolbarScale = 0.8;
 // Apply initial scale on load
 $(document).ready(() => {
 	ipcRenderer.send("toolbarScale", toolbarScale);
+	// Disable context menu on color items
+	$(".tool-item.color").on("contextmenu", (e) => e.preventDefault());
 });
 
 $(".tool-item.text").on("click", (e) => {
@@ -17,26 +19,54 @@ $(".tool-item.text").on("click", (e) => {
 	ipcRenderer.send("setMode", "draw");
 });
 
+// Left-click: set fill color
 $(".tool-item.secondary.color:not(.custom):not(.transparent)").on(
 	"click",
 	(e) => {
-		$(".color.tool-item.main").removeClass("transparent");
-		$(":root").css("--colSelect", "#" + e.target.getAttribute("colorData"));
-		$(".tool-item.color.main").attr(
+		$(".color.tool-item.main.fill").removeClass("transparent");
+		$(":root").css("--colFill", "#" + e.target.getAttribute("colorData"));
+		$(".tool-item.color.main.fill").attr(
 			"colorData",
 			e.target.getAttribute("colorData")
 		);
-		ipcRenderer.send("colSelect", e.target.getAttribute("colorData"));
+		ipcRenderer.send("colSelectFill", e.target.getAttribute("colorData"));
 	}
 );
 
+// Right-click: set stroke color
+$(".tool-item.secondary.color:not(.custom):not(.transparent)").on(
+	"contextmenu",
+	(e) => {
+		e.preventDefault();
+		$(".color.tool-item.main.stroke-indicator").removeClass("transparent");
+		$(":root").css("--colStroke", "#" + e.target.getAttribute("colorData"));
+		$(".tool-item.color.main.stroke-indicator").attr(
+			"colorData",
+			e.target.getAttribute("colorData")
+		);
+		ipcRenderer.send("colSelectStroke", e.target.getAttribute("colorData"));
+	}
+);
+
+// Left-click transparent: set fill to transparent
 $(".tool-item.secondary.transparent.color").on("click", (e) => {
-	$(".color.tool-item.main").addClass("transparent");
-	$(".tool-item.color.main").attr(
+	$(".color.tool-item.main.fill").addClass("transparent");
+	$(".tool-item.color.main.fill").attr(
 		"colorData",
 		e.target.getAttribute("colorData")
 	);
 	ipcRenderer.send("colSelectFill", e.target.getAttribute("colorData"));
+});
+
+// Right-click transparent: set stroke to transparent
+$(".tool-item.secondary.transparent.color").on("contextmenu", (e) => {
+	e.preventDefault();
+	$(".color.tool-item.main.stroke-indicator").addClass("transparent");
+	$(".tool-item.color.main.stroke-indicator").attr(
+		"colorData",
+		e.target.getAttribute("colorData")
+	);
+	ipcRenderer.send("colSelectStroke", e.target.getAttribute("colorData"));
 });
 
 $(".tool-item.color.custom").on("click", (e) => {
@@ -45,9 +75,9 @@ $(".tool-item.color.custom").on("click", (e) => {
 
 ipcRenderer.on("colSubmit", (e, arg) => {
 	colors = [arg].concat(colors).slice(0, 5);
-	$(".color.tool-item.main").removeClass("transparent");
-	$(":root").css("--colSelect", "#" + arg);
-	$(".tool-item.color.main").attr("colorData", arg);
+	$(".color.tool-item.main.fill").removeClass("transparent");
+	$(":root").css("--colFill", "#" + arg);
+	$(".tool-item.color.main.fill").attr("colorData", arg);
 	let elems = $(".tool-item.secondary.color:not(.custom):not(.transparent)");
 	for (let i = 0; i < elems.length; i++) {
 		$(elems[i]).attr("colorData", colors[i]);

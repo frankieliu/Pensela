@@ -165,6 +165,9 @@ function createWindow() {
 	ipcMain.on("colSelectFill", (e, arg) => {
 		board.webContents.send("colSelectFill", arg);
 	});
+	ipcMain.on("colSelectStroke", (e, arg) => {
+		board.webContents.send("colSelectStroke", arg);
+	});
 	ipcMain.on("customColor", (e, arg) =>
 		openPicker(
 			controller.getPosition()[0] +

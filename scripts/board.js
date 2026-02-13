@@ -25,6 +25,10 @@ stage.add(layer);
 
 // Helper function to apply opacity to hex colors
 function applyOpacity(hexColor) {
+	// If color is fully transparent (ends with 00 alpha), keep it transparent
+	if (hexColor.length === 9 && hexColor.slice(7, 9).toLowerCase() === '00') {
+		return hexColor;
+	}
 	const alpha = Math.round(boardState.opacity * 255).toString(16).padStart(2, '0');
 	const baseColor = hexColor.length === 9 ? hexColor.slice(0, 7) : hexColor;
 	return baseColor + alpha;
