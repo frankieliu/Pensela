@@ -41,7 +41,9 @@ This was upgraded from 22.11.7 to 26.7.0.
 npm run build:mac
 ```
 
-Or use the generic build command (builds for current platform):
+This command builds the app and automatically signs it with an ad-hoc signature.
+
+Or use the generic build command (builds for current platform, no auto-signing):
 
 ```bash
 npm run build

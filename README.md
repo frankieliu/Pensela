@@ -75,11 +75,8 @@ npm start
 # Build for current platform
 npm run build
 
-# Build for macOS specifically
+# Build for macOS (includes code signing)
 npm run build:mac
-
-# Sign the built app (required on macOS)
-codesign --force --deep --sign - build/mac-arm64/Pensela.app
 
 # Open the app
 open build/mac-arm64/Pensela.app
