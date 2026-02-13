@@ -35,7 +35,7 @@ let x = 0,
 	c = null,
 	inDraw = false;
 
-stage.on("click touchstart", () => {
+stage.on("mousedown touchstart", () => {
 	x = stage.getPointerPosition().x;
 	y = stage.getPointerPosition().y;
 });

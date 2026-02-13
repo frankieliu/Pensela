@@ -28,6 +28,7 @@ function createWindow() {
 		},
 		transparent: true,
 		frame: false,
+		acceptFirstMouse: true,
 		icon: path.join(__dirname, "/assets/Icon-512x512.png"),
 	});
 	board.setAlwaysOnTop(true, "screen");
@@ -68,6 +69,7 @@ function createWindow() {
 		transparent: true,
 		frame: false,
 		skipTaskbar: true,
+		acceptFirstMouse: true,
 		parent: board,
 		icon: "./assets/logo.png",
 	});
@@ -90,6 +92,7 @@ function createWindow() {
 			transparent: true,
 			frame: false,
 			skipTaskbar: true,
+			acceptFirstMouse: true,
 			parent: board,
 			icon: "./assets/logo.png",
 		});
@@ -113,6 +116,7 @@ function createWindow() {
 			transparent: true,
 			frame: false,
 			skipTaskbar: true,
+			acceptFirstMouse: true,
 			parent: board,
 			icon: "./assets/logo.png",
 		});
