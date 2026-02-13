@@ -38,7 +38,13 @@ This was upgraded from 22.11.7 to 26.7.0.
 ### Build the App
 
 ```bash
-npm run _private:build:macos
+npm run build:mac
+```
+
+Or use the generic build command (builds for current platform):
+
+```bash
+npm run build
 ```
 
 Or build specific targets:

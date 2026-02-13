@@ -5,6 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "electron . --no-sandbox",
+		"build": "electron-builder build --publish never --config ./electron-builder.json",
+		"build:mac": "electron-builder build -m --publish never --config ./electron-builder.json",
 		"build:wl": "electron-builder build -wl --publish never --config ./electron-builder.json",
 		"build:single": "electron-builder build --publish never --config ./electron-builder.json",
 		"deploy:wl": "electron-builder build -wl --publish always --config ./electron-builder.json",
