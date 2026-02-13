@@ -2,6 +2,12 @@ const { ipcRenderer } = require("electron");
 const jQuery = require("jquery");
 const $ = jQuery;
 let colors = ["ffb4bd", "b3fdd7", "ff2b9", "000"];
+let toolbarScale = 0.8;
+
+// Apply initial scale on load
+$(document).ready(() => {
+	ipcRenderer.send("toolbarScale", toolbarScale);
+});
 
 $(".tool-item.text").on("click", (e) => {
 	$(".selected").toggleClass("selected");
@@ -156,12 +162,18 @@ $(".tool-item.redo").on("click", () => ipcRenderer.send("redo"));
 
 $(".tool-item.screenshot").on("click", () => ipcRenderer.send("screenshot"));
 
-$(".tool-item.stroke.increase").on("click", () =>
-	ipcRenderer.send("strokeIncrease")
-);
-$(".tool-item.stroke.decrease").on("click", () =>
-	ipcRenderer.send("strokeDecrease")
-);
+$(".tool-item.stroke.increase").on("click", () => {
+	if (toolbarScale < 1.5) {
+		toolbarScale += 0.1;
+		ipcRenderer.send("toolbarScale", toolbarScale);
+	}
+});
+$(".tool-item.stroke.decrease").on("click", () => {
+	if (toolbarScale > 0.5) {
+		toolbarScale -= 0.1;
+		ipcRenderer.send("toolbarScale", toolbarScale);
+	}
+});
 
 ipcRenderer.on("strokeWidthChanged", (e, strokeWidth) => {
 	$(".brush-preview").css("--brush-size", strokeWidth + "px");

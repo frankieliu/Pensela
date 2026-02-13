@@ -306,6 +306,21 @@ function createWindow() {
 		board.webContents.send("opacityChanged", opacity)
 	);
 
+	const baseControllerWidth = Math.floor(
+		screen.getPrimaryDisplay().size.width * (1350 / 1920)
+	);
+	const baseControllerHeight = Math.floor(
+		(((screen.getPrimaryDisplay().size.width * 1350) / 1920) * 1) / 11
+	);
+	ipcMain.on("toolbarScale", (e, scale) => {
+		controller.setResizable(true);
+		controller.setSize(
+			Math.floor(baseControllerWidth * scale),
+			Math.floor(baseControllerHeight * scale)
+		);
+		controller.setResizable(false);
+	});
+
 	ipcMain.on("arrowSingle", () => board.webContents.send("arrowSingle"));
 	ipcMain.on("arrowDouble", () => board.webContents.send("arrowDouble"));
 
