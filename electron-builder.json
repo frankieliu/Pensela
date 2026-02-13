@@ -25,7 +25,7 @@
 		"depends": ["imagemagick"]
 	},
 	"mac": {
-		"target": ["dmg"],
+		"target": ["dmg", "zip"],
 		"icon": "./assets/logo.icns",
 		"hardenedRuntime": true,
 		"gatekeeperAssess": false,
