@@ -61,6 +61,34 @@ A Promo / Demo can be found [here](https://youtu.be/OzpgCw24ut8)
     -   Seperate Colors For Stroke and Fill
     -   Better Laser Pointer
 
+## Development
+
+### Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Run in development mode
+npm start
+
+# Build for macOS
+npm run _private:build:macos
+
+# Sign the built app (required on macOS)
+codesign --force --deep --sign - build/mac-arm64/Pensela.app
+
+# Open the app
+open build/mac-arm64/Pensela.app
+```
+
+### Build Outputs
+
+- `build/mac-arm64/Pensela.app` - Application bundle
+- `build/Pensela-1.2.5-arm64.dmg` - DMG installer
+
+See [docs/macos-build-guide.md](docs/macos-build-guide.md) for detailed build instructions and troubleshooting.
+
 ## Contributing
 
 Any kind of contribution is welcome
