@@ -373,3 +373,22 @@ body {
 .tool-item.alt-controls.redo {
 	background-image: url("./assets/icons/redo.png");
 }
+
+.brush-preview {
+	width: 50vh;
+	height: 50vh;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 0.75vw;
+}
+
+.brush-preview::before {
+	content: "";
+	width: var(--brush-size, 10px);
+	height: var(--brush-size, 10px);
+	background-color: var(--colSelect, #b4deff);
+	border-radius: 50%;
+	transition: width 0.15s ease-out, height 0.15s ease-out;
+}

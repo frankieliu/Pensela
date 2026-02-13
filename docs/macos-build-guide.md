@@ -117,8 +117,12 @@ npm start
 
 This runs `electron .` directly.
 
+### Sandbox Errors on Modern macOS
+
+If you see "sandbox initialization failed: Operation not permitted" errors when running `npm start`, the app now includes `--no-sandbox` flag by default. This is required for Electron on macOS 26.x and later.
+
 ## Notes
 
 - The app is ad-hoc signed, not notarized (requires Apple Developer credentials)
-- Electron version: 11.3.0
+- Electron version: 40.4.1
 - electron-builder version: 26.7.0

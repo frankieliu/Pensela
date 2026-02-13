@@ -286,6 +286,9 @@ function createWindow() {
 	ipcMain.on("strokeDecrease", () =>
 		board.webContents.send("strokeDecrease")
 	);
+	ipcMain.on("strokeWidthChanged", (e, strokeWidth) =>
+		controller.webContents.send("strokeWidthChanged", strokeWidth)
+	);
 
 	ipcMain.on("arrowSingle", () => board.webContents.send("arrowSingle"));
 	ipcMain.on("arrowDouble", () => board.webContents.send("arrowDouble"));

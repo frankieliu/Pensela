@@ -163,6 +163,10 @@ $(".tool-item.stroke.decrease").on("click", () =>
 	ipcRenderer.send("strokeDecrease")
 );
 
+ipcRenderer.on("strokeWidthChanged", (e, strokeWidth) => {
+	$(".brush-preview").css("--brush-size", strokeWidth + "px");
+});
+
 $(".tool-item.arrow.single").on("click", () => ipcRenderer.send("arrowSingle"));
 $(".tool-item.arrow.double").on("click", () => ipcRenderer.send("arrowDouble"));
 

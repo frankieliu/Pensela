@@ -24,8 +24,10 @@ ipcRenderer.on("colSelectStroke", (e, arg) => {
 
 ipcRenderer.on("strokeIncrease", () => {
 	if (boardState.strokeWidth < 30) boardState.strokeWidth += 5;
+	ipcRenderer.send("strokeWidthChanged", boardState.strokeWidth);
 });
 
 ipcRenderer.on("strokeDecrease", () => {
 	if (boardState.strokeWidth > 5) boardState.strokeWidth -= 5;
+	ipcRenderer.send("strokeWidthChanged", boardState.strokeWidth);
 });
