@@ -31,10 +31,41 @@
 
 ## Screenshots
 
+![Screenshot](./assets/pensala-screenshot.png)
 ![Screenshot](./assets/screenshot2.png)
 ![Screenshot](./assets/screenshot1.png)
 
 A Promo / Demo can be found [here](https://youtu.be/OzpgCw24ut8)
+
+## Fork Enhancements
+
+This fork includes several improvements and new features:
+
+### Brush Controls
+- **Visual Brush Preview** - Real-time circular preview showing current brush size
+- **Brush Size Slider** - Drag slider to adjust brush size (2-10px range)
+- **Global Opacity Slider** - Adjust transparency for all drawing tools (0-100%)
+- **Default Settings** - Starts with freehand tool, 5px brush, 50% opacity
+
+### Toolbar Improvements
+- **Scalable Toolbar** - Use up/down buttons to resize toolbar (0.5x to 1.5x)
+- **Draggable Handle** - Drag the top strip to reposition the toolbar
+- **Compact Default Size** - Toolbar starts at 80% scale for less screen clutter
+
+### Technical Improvements
+- **Electron 40.4.1** - Upgraded from Electron 11 for better compatibility
+- **electron-builder 26.7.0** - Modern build system with Python 3 support
+- **macOS Build Script** - `npm run build:mac` builds and signs automatically
+- **Fixed Extra Click Bug** - Tools now respond on first click (acceptFirstMouse)
+
+### Documentation
+See the `docs/` folder for detailed documentation:
+- [macOS Build Guide](docs/macos-build-guide.md)
+- [Brush Preview Feature](docs/brush-preview-feature.md)
+- [Opacity Slider Feature](docs/opacity-slider-feature.md)
+- [Toolbar Scaling Feature](docs/toolbar-scaling-feature.md)
+- [Default Settings Feature](docs/default-settings-feature.md)
+- [Extra Click Bug Fix](docs/extra-click-bug-fix.md)
 
 ## Installation
 
