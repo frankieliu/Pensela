@@ -51,7 +51,7 @@
 				<div class="tool-item sticker cross" title="Cross"></div>
 				<div class="tool-item sticker star" title="Star"></div>
 				<div
-					class="tool-item sticker pen main"
+					class="tool-item sticker pen main selected"
 					title="Draw Freehand"
 				></div>
 				<div class="tool-item sticker eraser" title="Eraser"></div>
@@ -77,7 +77,7 @@
 				title="Choose Background Color"
 			></div>
 			<div class="tool-container win-controls">
-				<div class="tool-item win-controls mouse main selected"></div>
+				<div class="tool-item win-controls mouse main"></div>
 				<div class="tool-item win-controls drag" title="drag"></div>
 				<div
 					class="tool-item win-controls screenshot"
@@ -92,10 +92,13 @@
 					title="Toggle Visibility"
 				></div>
 			</div>
-			<div class="opacity-control" title="Opacity">
-				<input type="range" class="opacity-slider" min="0" max="100" value="100">
+			<div class="brush-controls">
+				<div class="brush-left">
+					<div class="brush-preview" title="Current brush size"></div>
+					<input type="range" class="size-slider" min="2" max="10" value="5" title="Brush size">
+				</div>
+				<input type="range" class="opacity-slider vertical" min="0" max="100" value="50" title="Opacity">
 			</div>
-			<div class="brush-preview" title="Current brush size"></div>
 			<div class="tool-container alt-controls">
 				<div class="tool-item alt-controls redo" title="redo"></div>
 				<div

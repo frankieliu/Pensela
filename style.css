@@ -374,10 +374,25 @@ body {
 	background-image: url("./assets/icons/redo.png");
 }
 
-.brush-preview {
-	width: 50vh;
-	height: 50vh;
+.brush-controls {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	margin: auto;
+	height: 56vh;
+	gap: 1vh;
+}
+
+.brush-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1vh;
+}
+
+.brush-preview {
+	width: 35vh;
+	height: 35vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -386,35 +401,55 @@ body {
 
 .brush-preview::before {
 	content: "";
-	width: var(--brush-size, 10px);
-	height: var(--brush-size, 10px);
+	width: var(--brush-size, 5px);
+	height: var(--brush-size, 5px);
 	background-color: var(--colSelect, #b4deff);
 	border-radius: 50%;
 	transition: width 0.15s ease-out, height 0.15s ease-out;
 }
 
-.opacity-control {
-	width: 50vh;
-	height: 50vh;
-	margin: auto;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.size-slider {
+	-webkit-appearance: none;
+	width: 35vh;
+	height: 6px;
+	border-radius: 3px;
+	background: linear-gradient(to right, #444, var(--colSelect, #b4deff));
+	outline: none;
+}
+
+.size-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: #fff;
+	cursor: pointer;
+	box-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
 
 .opacity-slider {
 	-webkit-appearance: none;
-	width: 40vh;
+	width: 45vh;
 	height: 8px;
 	border-radius: 4px;
-	background: linear-gradient(to right, transparent, var(--colSelect, #b4deff));
+	background:
+		linear-gradient(to left, rgba(255,255,255,0.1), var(--colSelect, #b4deff)),
+		repeating-linear-gradient(
+			45deg,
+			#333 0px,
+			#333 4px,
+			#555 4px,
+			#555 8px
+		);
 	outline: none;
+	transform: rotate(-90deg);
+	transform-origin: center center;
 }
 
 .opacity-slider::-webkit-slider-thumb {
 	-webkit-appearance: none;
-	width: 16px;
-	height: 16px;
+	width: 14px;
+	height: 14px;
 	border-radius: 50%;
 	background: #fff;
 	cursor: pointer;

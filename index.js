@@ -78,6 +78,12 @@ function createWindow() {
 	controller.loadFile("controller.html");
 	controller.setResizable(false);
 
+	// Set default tool to freehand after windows load
+	board.webContents.on("did-finish-load", () => {
+		board.webContents.send("setMode", "draw");
+		board.webContents.send("drawFreehand");
+	});
+
 	function openPicker(x, y) {
 		const picker = new BrowserWindow({
 			width: Math.floor(screen.getPrimaryDisplay().size.width / 6),
@@ -292,6 +298,9 @@ function createWindow() {
 	);
 	ipcMain.on("strokeWidthChanged", (e, strokeWidth) =>
 		controller.webContents.send("strokeWidthChanged", strokeWidth)
+	);
+	ipcMain.on("strokeWidthSet", (e, size) =>
+		board.webContents.send("strokeWidthSet", size)
 	);
 	ipcMain.on("opacityChanged", (e, opacity) =>
 		board.webContents.send("opacityChanged", opacity)

@@ -7,8 +7,8 @@ let boardState = {
 	bg: "#00000000",
 	before: [],
 	after: [],
-	strokeWidth: 10,
-	opacity: 1.0,
+	strokeWidth: 5,
+	opacity: 0.5,
 };
 
 ipcRenderer.on("setMode", (e, arg) => {
@@ -24,13 +24,17 @@ ipcRenderer.on("colSelectStroke", (e, arg) => {
 });
 
 ipcRenderer.on("strokeIncrease", () => {
-	if (boardState.strokeWidth < 30) boardState.strokeWidth += 5;
+	if (boardState.strokeWidth < 10) boardState.strokeWidth += 1;
 	ipcRenderer.send("strokeWidthChanged", boardState.strokeWidth);
 });
 
 ipcRenderer.on("strokeDecrease", () => {
-	if (boardState.strokeWidth > 5) boardState.strokeWidth -= 5;
+	if (boardState.strokeWidth > 2) boardState.strokeWidth -= 1;
 	ipcRenderer.send("strokeWidthChanged", boardState.strokeWidth);
+});
+
+ipcRenderer.on("strokeWidthSet", (e, size) => {
+	boardState.strokeWidth = size;
 });
 
 ipcRenderer.on("opacityChanged", (e, opacity) => {
